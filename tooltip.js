@@ -11,6 +11,11 @@ class Tooltip extends HTMLElement {
           color: white;
           position: absolute;
           z-index: 10;
+          top: 1.5rem;
+          left: 0.75rem;
+          padding: 0.15rem 0.5rem;
+          border-radius: 3px;
+          box-shadow: 1px 1px 6px rgba(0,0,0,0.26)
         }
       </style>
       <slot></slot>
@@ -25,8 +30,11 @@ class Tooltip extends HTMLElement {
     const tooltipIcon = this.shadowRoot.querySelector('span');
     tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
     tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
-    this.shadowRoot.appendChild(tooltipIcon);
     this.style.position = 'relative';
+  }
+
+  disconnectedCallback() {
+    console.log('Disconnected')
   }
 
   _showTooltip() {
